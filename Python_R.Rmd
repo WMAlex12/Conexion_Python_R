@@ -1,7 +1,9 @@
 ```{r instalación del entorno en Python}
 ### 
 #install.packages("reticulate")
-
+## En el siguiente link se encuentra una pequeña documentación visual de como funciona reticulate y como lo puedes utilizar en ambas extensiones de R (.R, Rmd)
+## https://raw.githubusercontent.com/rstudio/cheatsheets/main/translations/spanish/reticulate_es.pdf
+ 
 library(reticulate)
 env_path <- "Python_R"
 virtualenv_create(envname = env_path)
@@ -11,6 +13,7 @@ use_virtualenv(env_path)
 ```
 
 ```{python}
+## Importa las librerias que se utilizan en python
 import numpy as np
 import pandas as pd
 import matplotlib as plt
@@ -18,27 +21,33 @@ import seaborn as sns
 ```
 
 ```{python}
-
+## Recolección de un dataframe 
 crashes =sns.load_dataset("car_crashes", index_col = "abbrev") [["alcohol", "total"]]
 crashes.head()
 ```
 
 ```{r}
+# Desde R recolecta el dataset "car_crashes", utilizando el comando py$
+# Importante: ESte comando te permite recolectar todo tipo de frgamentos creados en python, para 
+# utilizarlos en el formato más optimo en R (Mantiene la conversión de datos utilizada en python)
+
+# Importante: Siempre revisar la documentación de los dataframes, BD y librerias. 
+
 crash_alcohol <- subset(py$car_crashes, alcohol >= 2)
 head(py$car_crashes)
+
 ```
 
 ```{python}
-
-import matplotlib as plt
-
+## En esta celda, se genera una gráfica sencilla para mostrar que se pueden recolectar los datos de R a python y ser procesado en el mismo.
+## Importante: Para recolectar datos de R, siempre se debe de utilizar el comando r."nombre_del_dataframe". 
 sns.scatterplot(x = "alcohol",y = "total", data = r.crash_alcohol)
 plt.pyplot.show()
 
 ```
 
 ```{python}
-
+### Esto todavio no lo hago jalar
 children_survivor = r.children_survivors
 children_survivor.head()
 x1 = children_survivor[1]
