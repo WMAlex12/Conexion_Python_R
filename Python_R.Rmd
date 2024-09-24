@@ -5,11 +5,27 @@
 ## https://raw.githubusercontent.com/rstudio/cheatsheets/main/translations/spanish/reticulate_es.pdf
  
 library(reticulate)
-env_path <- "Python_R"
-virtualenv_create(envname = env_path)
-py_install("seaborn", envname = env_path)
-use_virtualenv(env_path)
+### Descarga de python en caso de no tenerla activa
+#install_python(
+ # version = "3.10.12", 
+ # optimized = T)
 
+# Nombre del entorno 
+env_path <- "Conexion_Python_R"
+#Creación del entorno
+virtualenv_create(envname = env_path)
+
+# Activando el entorno
+use_virtualenv(env_path)
+```
+
+```{r}
+# instalar la libreria seaborn en el entorno 
+
+py_install("numpy", envname = env_path)
+py_install("pandas", envname = env_path)
+py_install("matplotlib", envname = env_path)
+py_install("seaborn", envname = env_path)
 ```
 
 ```{python}
@@ -33,8 +49,12 @@ crashes.head()
 
 # Importante: Siempre revisar la documentación de los dataframes, BD y librerias. 
 
-crash_alcohol <- subset(py$car_crashes, alcohol >= 2)
-head(py$car_crashes)
+crash_alcohol <- subset(py$crashes, alcohol >= 2)
+head(py$crashes)
+
+install.packages("ggplo2")
+
+head(iris)
 
 ```
 
@@ -48,14 +68,14 @@ plt.pyplot.show()
 
 ```{python}
 ### Esto todavio no lo hago jalar
-children_survivor = r.children_survivors
-children_survivor.head()
-x1 = children_survivor[1]
+iris = r.iris
+iris.head()
+x1 = iris[1]
 x1.head()
 
 fig, ax =plt.subplots()
 
-ax.hist(x, bins=8, linewidth=0.5, edgecolor="white")
+ax.hist(x, bins=8, linewidth=0.5, edgecolor="")
 
 ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
        ylim=(0, 56), yticks=np.linspace(0, 56, 9))
